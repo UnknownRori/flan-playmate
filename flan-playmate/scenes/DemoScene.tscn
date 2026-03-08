@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://qqd6vi6kxxtq"]
 
 [ext_resource type="PackedScene" uid="uid://b13h3o26rij61" path="res://entity/Player.tscn" id="1_hro3w"]
+[ext_resource type="PackedScene" uid="uid://bv7rlsnyfo1ah" path="res://ui/HUD.tscn" id="3_u3y0p"]
 
 [sub_resource type="Environment" id="Environment_te36y"]
 
@@ -9,3 +10,5 @@ environment = SubResource("Environment_te36y")
 
 [node name="Player" parent="." unique_id=2090335859 instance=ExtResource("1_hro3w")]
 position = Vector2(128, 205)
+
+[node name="Hud" parent="." unique_id=1881991769 instance=ExtResource("3_u3y0p")]

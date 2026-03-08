@@ -9,8 +9,7 @@ extends NodeState
 func _on_process(_dt: float) -> void:
     GameInputs.update_movement()
     
-    if GameInputs.is_confirm():
-        # TODO: Spawn bullets
+    if GameInputs.is_attack():
         pass
     
     entity.velocity *= friction

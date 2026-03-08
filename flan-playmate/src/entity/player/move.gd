@@ -16,8 +16,7 @@ func _on_process(_dt: float) -> void:
     if dir.x == -1.0:
         sprite.play("left")    
     
-    if GameInputs.is_confirm():
-        # TODO: Spawn bullets
+    if GameInputs.is_attack():
         pass
 
     entity.velocity += dir * accel

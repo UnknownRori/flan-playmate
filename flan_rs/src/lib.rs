@@ -31,6 +31,12 @@ unsafe impl ExtensionLibrary for FlanExtension {
 }
 
 impl FlanExtension {
+    fn get_singleton<T: GodotClass + NewAlloc + Inherits<Object>>() -> Option<Gd<T>> {
+        Engine::singleton()
+            .get_singleton(&T::class_id().to_string_name())
+            .map(|i| i.cast::<T>())
+    }
+
     fn register_singleton<T: GodotClass + NewAlloc + Inherits<Object>>() {
         Engine::singleton().register_singleton(&T::class_id().to_string_name(), &T::new_alloc());
     }
