@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bv7rlsnyfo1ah"]
+
+[ext_resource type="PackedScene" uid="uid://8nwxq5in5hhm" path="res://ui/HP.tscn" id="1_1x8ju"]
+
+[node name="Hud" type="CanvasLayer" unique_id=1881991769]
+
+[node name="Hp" parent="." unique_id=844654883 instance=ExtResource("1_1x8ju")]

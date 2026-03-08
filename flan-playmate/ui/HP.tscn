@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://8nwxq5in5hhm"]
+
+[ext_resource type="Theme" uid="uid://c160it28u3wq" path="res://assets/themes/default_theme.tres" id="1_bxljl"]
+[ext_resource type="Texture2D" uid="uid://d054aifhxvhsx" path="res://assets/textures/ui.png" id="1_dqh7s"]
+[ext_resource type="Script" uid="uid://b1dl5p81ag7gq" path="res://src/ui/hp.gd" id="1_t1e47"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgd1w"]
+atlas = ExtResource("1_dqh7s")
+region = Rect2(0, 0, 16, 16)
+
+[node name="Hp" type="HBoxContainer" unique_id=844654883]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_bxljl")
+script = ExtResource("1_t1e47")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=973192822]
+layout_mode = 2
+texture = SubResource("AtlasTexture_lgd1w")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="." unique_id=1444777568]
+layout_mode = 2
+text = "0000"
