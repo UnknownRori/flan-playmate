@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://2rle0su4iqew"]
+
+[ext_resource type="Texture2D" uid="uid://meswjlfopipp" path="res://assets/textures/bullets.png" id="1_1xvxh"]
+[ext_resource type="Shader" uid="uid://bnei5os4g3yte" path="res://shaders/BulletRenderer.gdshader" id="1_ujmxs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ujmxs"]
+resource_local_to_scene = true
+shader = ExtResource("1_ujmxs")
+shader_parameter/atlas_texture = ExtResource("1_1xvxh")
+
+[sub_resource type="QuadMesh" id="QuadMesh_1xvxh"]
+size = Vector2(16, 16)
+
+[sub_resource type="MultiMesh" id="MultiMesh_ujmxs"]
+use_custom_data = true
+mesh = SubResource("QuadMesh_1xvxh")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0h0x"]
+atlas = ExtResource("1_1xvxh")
+
+[sub_resource type="GDScript" id="GDScript_ujmxs"]
+script/source = "extends MultiMeshInstance2D
+
+func _ready() -> void:
+    multimesh.instance_count = 2
+
+func _process(_delta: float) -> void:
+    set_instance(0, Vector2(100, 100), Rect2(0, 0, 16, 16), texture.get_size())
+    set_instance(1, Vector2(50, 100), Rect2(16, 0, 16, 16), texture.get_size())
+    print(multimesh.get_instance_custom_data(0))
+
+
+func set_instance(index: int, pos: Vector2, atlas_region: Rect2, atlas_size: Vector2):
+    # Transform
+    var t := Transform2D()
+    t.origin = pos
+    multimesh.set_instance_transform_2d(index, t)
+
+    # Convert pixel rect → normalized UV offset + scale
+    var uv_offset := atlas_region.position / atlas_size
+    var uv_scale  := atlas_region.size    / atlas_size
+
+    # Pack into Color (vec4): rg = offset, ba = scale
+    multimesh.set_instance_custom_data(index, Color(
+        uv_offset.x, uv_offset.y,
+        uv_scale.x,  uv_scale.y
+    ))
+"
+
+[node name="BulletRenderer" type="MultiMeshInstance2D" unique_id=384708198]
+material = SubResource("ShaderMaterial_ujmxs")
+multimesh = SubResource("MultiMesh_ujmxs")
+texture = SubResource("AtlasTexture_f0h0x")
+script = SubResource("GDScript_ujmxs")

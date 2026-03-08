@@ -1,6 +1,7 @@
-use godot::classes::{CharacterBody2D, Engine, ICharacterBody2D};
+use godot::classes::{CharacterBody2D, ICharacterBody2D};
 use godot::prelude::*;
 
+use crate::FlanExtension;
 use crate::components::health_component::HealthComponent;
 use crate::game_state::GameState;
 
@@ -19,14 +20,10 @@ impl ICharacterBody2D for Player {
     }
 
     fn ready(&mut self) {
-        let mut state = Engine::singleton()
-            .get_singleton(&GameState::class_id().to_string_name())
-            .unwrap()
-            .try_cast::<GameState>()
-            .unwrap();
+        let mut gm = FlanExtension::get_singleton::<GameState>().unwrap();
         if let Some(hp) = &self.hp {
             let hp = hp.clone();
-            state.set("player_hp", &hp.to_variant());
+            gm.bind_mut().player_hp = Some(hp);
         }
     }
 }

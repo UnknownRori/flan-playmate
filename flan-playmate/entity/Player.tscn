@@ -45,7 +45,8 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_glu0s"]
 
-[node name="Player" type="Player" unique_id=2090335859]
+[node name="Player" type="Player" unique_id=2090335859 node_paths=PackedStringArray("hp")]
+hp = NodePath("HealthComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=566232744]
 sprite_frames = SubResource("SpriteFrames_maded")
