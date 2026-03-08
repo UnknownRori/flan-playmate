@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://b13h3o26rij61"]
+
+[ext_resource type="Texture2D" uid="uid://cusuqty4nxenx" path="res://assets/textures/flandre.png" id="1_glu0s"]
+[ext_resource type="Script" uid="uid://bk8i66vjeafa2" path="res://src/entity/player/idle.gd" id="2_birc2"]
+[ext_resource type="Script" uid="uid://c8cpgkpcq3emj" path="res://src/entity/player/move.gd" id="3_xuay3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_birc2"]
+atlas = ExtResource("1_glu0s")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xuay3"]
+atlas = ExtResource("1_glu0s")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnrw7"]
+atlas = ExtResource("1_glu0s")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_maded"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_birc2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xuay3")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gnrw7")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_glu0s"]
+
+[node name="Player" type="Player" unique_id=2090335859]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=566232744]
+sprite_frames = SubResource("SpriteFrames_maded")
+animation = &"right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=170117485]
+shape = SubResource("CircleShape2D_glu0s")
+
+[node name="HealthComponent" type="HealthComponent" parent="." unique_id=769555914]
+current_hp = 40.0
+max_hp = 40.0
+
+[node name="StateMachine" type="StateMachine" parent="." unique_id=1299920099 node_paths=PackedStringArray("current")]
+current = NodePath("Idle")
+
+[node name="Idle" type="NodeState" parent="StateMachine" unique_id=1387493718]
+script = ExtResource("2_birc2")
+
+[node name="Move" type="NodeState" parent="StateMachine" unique_id=1717686612]
+script = ExtResource("3_xuay3")
