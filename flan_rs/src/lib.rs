@@ -2,14 +2,13 @@ use std::error::Error;
 
 use godot::{classes::Engine, obj::NewAlloc, prelude::*};
 
-use crate::{game_inputs::GameInputs, game_state::GameState};
+use crate::autoload::*;
 
+pub mod autoload;
 pub mod bullet_manager;
 pub mod bullet_renderer;
 pub mod components;
 pub mod entities;
-pub mod game_inputs;
-pub mod game_state;
 pub mod node_state;
 pub mod pools;
 pub mod state_machine;

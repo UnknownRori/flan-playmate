@@ -2,8 +2,8 @@ use godot::classes::{CharacterBody2D, ICharacterBody2D};
 use godot::prelude::*;
 
 use crate::FlanExtension;
+use crate::autoload::GameState;
 use crate::components::health_component::HealthComponent;
-use crate::game_state::GameState;
 
 #[derive(GodotClass)]
 #[class(base=CharacterBody2D)]

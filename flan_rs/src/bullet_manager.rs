@@ -1,6 +1,6 @@
 use godot::prelude::*;
 
-use crate::{FlanExtension, game_state::GameState, pools::bullet::*};
+use crate::{FlanExtension, autoload::GameState, pools::bullet::*};
 
 #[derive(GodotClass)]
 #[class(base=Node)]
@@ -43,7 +43,7 @@ impl BulletManager {
     }
 
     #[func]
-    fn spawn(&mut self, position: Vector2, velocity: Vector2, texture: Rect2) {
+    pub fn spawn(&mut self, position: Vector2, velocity: Vector2, texture: Rect2) {
         self.pool.spawn(position, velocity, texture);
     }
 }
