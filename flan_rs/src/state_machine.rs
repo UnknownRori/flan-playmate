@@ -39,7 +39,7 @@ impl INode for StateMachine {
                 .connect_other_mut(&*self, Self::transition_to);
 
             let name = node.get_name().to_lower();
-            self.lists.set(name, node);
+            self.lists.set(&name, &node);
         }
 
         if let Some(initial) = &mut self.initial {
@@ -68,7 +68,7 @@ impl INode for StateMachine {
 impl StateMachine {
     fn transition_to(&mut self, name: GString) {
         let name = name.to_lower();
-        let value = self.lists.get(name).expect("No node found!");
+        let value = self.lists.get(&name).expect("No node found!");
         let mut node = value.try_to::<Gd<NodeState>>().expect("Not NodeState");
         if let Some(current) = &mut self.current {
             current.bind_mut().on_leave();
