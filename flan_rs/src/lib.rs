@@ -4,6 +4,8 @@ use godot::{classes::Engine, obj::NewAlloc, prelude::*};
 
 use crate::{game_inputs::GameInputs, game_state::GameState};
 
+pub mod bullet_manager;
+pub mod bullet_renderer;
 pub mod components;
 pub mod entities;
 pub mod game_inputs;

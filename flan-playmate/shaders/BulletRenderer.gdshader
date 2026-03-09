@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform sampler2D atlas_texture;
+uniform sampler2D atlas_texture : filter_nearest;
 varying vec2 instance_uv;
 
 void vertex() {

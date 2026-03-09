@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://qqd6vi6kxxtq"]
 
 [ext_resource type="PackedScene" uid="uid://b13h3o26rij61" path="res://entity/Player.tscn" id="1_hro3w"]
+[ext_resource type="PackedScene" uid="uid://2rle0su4iqew" path="res://other/BulletRenderer.tscn" id="2_0mbge"]
 [ext_resource type="PackedScene" uid="uid://bv7rlsnyfo1ah" path="res://ui/HUD.tscn" id="3_u3y0p"]
 
 [sub_resource type="Environment" id="Environment_te36y"]
@@ -12,3 +13,8 @@ environment = SubResource("Environment_te36y")
 position = Vector2(128, 205)
 
 [node name="Hud" parent="." unique_id=1881991769 instance=ExtResource("3_u3y0p")]
+
+[node name="BulletManager" type="BulletManager" parent="." unique_id=1407040143]
+
+[node name="BulletRenderer" parent="." unique_id=926750476 node_paths=PackedStringArray("bullet_manager") instance=ExtResource("2_0mbge")]
+bullet_manager = NodePath("../BulletManager")
