@@ -8,6 +8,7 @@ extends NodeState
 func _on_process(_dt: float) -> void:
     var dir = GameInputs.update_movement()
     velocity.set_dir(dir)
+    velocity.set_focus(GameInputs.is_focus())
     
     if dir.x == 1.0:
         sprite.play("right")

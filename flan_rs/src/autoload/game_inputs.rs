@@ -38,6 +38,11 @@ impl GameInputs {
     }
 
     #[func]
+    fn is_focus(&mut self) -> bool {
+        Input::singleton().is_action_pressed("focus")
+    }
+
+    #[func]
     fn is_attack(&mut self) -> bool {
         Input::singleton().is_action_pressed("confirm")
     }

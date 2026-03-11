@@ -14,6 +14,8 @@ pub struct VelocityComponent {
     max_speed: f64,
     #[export]
     friction: f64,
+    #[export]
+    focus: bool,
 
     #[var]
     velocity: Vector2,
@@ -26,11 +28,15 @@ pub struct VelocityComponent {
 #[godot_api]
 impl INode for VelocityComponent {
     fn process(&mut self, dt: f64) {
+        let max_speed = if self.focus {
+            self.max_speed * 0.5
+        } else {
+            self.max_speed
+        };
         self.velocity += self.direction * self.acceleration as f32;
-        self.velocity = self.velocity.clamp(
-            vec2f!(-self.max_speed as f32),
-            vec2f!(self.max_speed as f32),
-        );
+        self.velocity = self
+            .velocity
+            .clamp(vec2f!(-max_speed as f32), vec2f!(max_speed as f32));
         self.velocity *= self.friction as f32;
 
         let mut entity = self.entity.clone().unwrap();
