@@ -26,17 +26,17 @@ modulate = Color(0.34117648, 0.4862745, 1, 0.39215687)
 tile_map_data = PackedByteArray("AAAEAAkAAAADAAEAAAAEAAoAAAADAAIAAAAFAAkAAAAEAAEAAAAFAAoAAAAEAAIAAAAKAAkAAAADAAEAAAAKAAoAAAADAAIAAAALAAkAAAAEAAEAAAALAAoAAAAEAAIAAAAEAAsAAAADAAMAAAAFAAsAAAAEAAMAAAAKAAsAAAADAAMAAAALAAsAAAAEAAMAAAA=")
 tile_set = ExtResource("1_f11xd")
 
-[node name="Player" parent="." unique_id=2090335859 instance=ExtResource("1_hro3w")]
-position = Vector2(128, 205)
-
-[node name="Hud" parent="." unique_id=1881991769 instance=ExtResource("3_u3y0p")]
-
 [node name="BulletManager" type="BulletManager" parent="." unique_id=1407040143]
 
 [node name="BulletRenderer" parent="." unique_id=926750476 node_paths=PackedStringArray("bullet_manager") instance=ExtResource("2_0mbge")]
 bullet_manager = NodePath("../BulletManager")
 
+[node name="Player" parent="." unique_id=2090335859 instance=ExtResource("1_hro3w")]
+position = Vector2(128, 205)
+
 [node name="Koishi" parent="." unique_id=141144176 instance=ExtResource("4_aoya2")]
 position = Vector2(120, 38)
 
 [node name="VerticalBoundary" parent="." unique_id=936517935 instance=ExtResource("6_hbx0r")]
+
+[node name="Hud" parent="." unique_id=1881991769 instance=ExtResource("3_u3y0p")]

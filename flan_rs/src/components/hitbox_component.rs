@@ -1,6 +1,8 @@
 use godot::classes::*;
 use godot::prelude::*;
 
+use crate::pools::EntityCollision;
+
 #[derive(GodotClass)]
 #[class(init, base=Area2D)]
 /// This component automatically registering collision box to [`BulletManager`]
@@ -11,6 +13,8 @@ pub struct HitboxComponent {
     pub parent: Option<Gd<Node2D>>,
     #[export]
     pub radius: f64,
+    #[export]
+    pub mask: EntityCollision,
     base: Base<Area2D>,
 }
 

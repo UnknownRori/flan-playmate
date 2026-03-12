@@ -66,6 +66,7 @@ shape = SubResource("CircleShape2D_glu0s")
 [node name="HitboxComponent" type="HitboxComponent" parent="." unique_id=43131582 node_paths=PackedStringArray("parent")]
 parent = NodePath("..")
 radius = 2.0
+mask = "Player"
 collision_layer = 2
 collision_mask = 20
 

@@ -25,7 +25,7 @@ impl INode for HealthComponent {
 #[godot_api]
 impl HealthComponent {
     #[func]
-    fn take_damage(&mut self, value: f64) {
+    pub fn take_damage(&mut self, value: f64) {
         self.current_hp -= value;
         let hp = self.current_hp;
         if hp < 0. {
