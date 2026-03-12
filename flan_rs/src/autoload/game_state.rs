@@ -28,6 +28,7 @@ impl GameState {
         texture: Rect2,
         collision: EntityCollision,
         bullet_type: BulletType,
+        damage: i64,
     ) {
         let mut bm = self.bullet_manager.clone().unwrap();
         bm.run_deferred(move |bm| {
@@ -39,6 +40,7 @@ impl GameState {
                 texture,
                 collision,
                 bullet_type,
+                damage,
             )
         });
     }

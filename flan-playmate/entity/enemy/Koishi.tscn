@@ -1,23 +1,36 @@
 [gd_scene format=3 uid="uid://b78bs78oe3y3d"]
 
-[ext_resource type="Texture2D" uid="uid://dkg7l4sm68uie" path="res://assets/textures/koishi.png" id="1_kkp65"]
+[ext_resource type="PackedScene" uid="uid://c11fepolev4j1" path="res://components/SpriteComponent.tscn" id="1_0532m"]
+[ext_resource type="SpriteFrames" uid="uid://dywu0b5lj155s" path="res://assets/atlas/koishi.tres" id="1_hbinb"]
 [ext_resource type="Script" uid="uid://dvg3rwhghrbpd" path="res://src/entity/koishi/phase_1.gd" id="2_axao5"]
 [ext_resource type="BulletResource" uid="uid://blsxw1g5vbw3a" path="res://resources/bullets/LoveBullet.tres" id="2_hbinb"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_axao5"]
-atlas = ExtResource("1_kkp65")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="Shader" id="Shader_0532m"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_gp81r"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_axao5")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}]
+uniform float interpolation : hint_range(0, 1);
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	if (COLOR.a > 0.0) {
+        COLOR = mix(COLOR, vec4(1), interpolation);
+    }
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rw8ym"]
+resource_local_to_scene = true
+shader = SubResource("Shader_0532m")
+shader_parameter/interpolation = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kkp65"]
 
@@ -27,10 +40,12 @@ radius = 5.0
 [node name="Koishi" type="Enemy" unique_id=2048994200 node_paths=PackedStringArray("hitbox", "hp") groups=["Enemy"]]
 hitbox = NodePath("HitboxComponent")
 hp = NodePath("HealthComponent")
+is_boss = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=887965648]
-sprite_frames = SubResource("SpriteFrames_gp81r")
-animation = &"idle"
+[node name="SpriteComponent" parent="." unique_id=1587211298 node_paths=PackedStringArray("hp") instance=ExtResource("1_0532m")]
+material = SubResource("ShaderMaterial_rw8ym")
+sprite_frames = ExtResource("1_hbinb")
+hp = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1504326857]
 shape = SubResource("CircleShape2D_kkp65")
@@ -47,11 +62,12 @@ debug_color = Color(0.9730806, 0, 0.43987608, 0.41960785)
 
 [node name="BulletSpawnerComponent" type="BulletSpawnerComponent" parent="." unique_id=1102358142]
 target = "Player"
+damage = 1
 bullet = ExtResource("2_hbinb")
 
 [node name="HealthComponent" type="HealthComponent" parent="." unique_id=2033885468]
-current_hp = 500.0
-max_hp = 500.0
+current_hp = 100.0
+max_hp = 100.0
 
 [node name="VelocityComponent" type="VelocityComponent" parent="." unique_id=1312228563 node_paths=PackedStringArray("entity")]
 entity = NodePath("..")
@@ -59,8 +75,10 @@ entity = NodePath("..")
 [node name="StateMachine" type="StateMachine" parent="." unique_id=775177710 node_paths=PackedStringArray("current")]
 current = NodePath("Phase 1")
 
-[node name="Phase 1" type="NodeState" parent="StateMachine" unique_id=1330746589 node_paths=PackedStringArray("entity", "bullet_1")]
+[node name="Phase 1" type="NodeState" parent="StateMachine" unique_id=1330746589 node_paths=PackedStringArray("entity", "hp", "bullet_1")]
 script = ExtResource("2_axao5")
 entity = NodePath("../..")
+hp = NodePath("../../HealthComponent")
 bullet_1 = NodePath("../../BulletSpawnerComponent")
 timeout = 60.0
+hp_max = 100

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c11fepolev4j1"]
+
+[ext_resource type="Shader" uid="uid://3weajlto48cc" path="res://shaders/SpriteComponent.gdshader" id="1_xtuqe"]
+[ext_resource type="Script" uid="uid://blqmbfr8lquhs" path="res://src/components/sprite_component.gd" id="2_lyj8j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lyj8j"]
+resource_local_to_scene = true
+shader = ExtResource("1_xtuqe")
+shader_parameter/interpolation = 0.0
+
+[node name="SpriteComponent" type="AnimatedSprite2D" unique_id=1587211298]
+material = SubResource("ShaderMaterial_lyj8j")
+animation = &"idle"
+script = ExtResource("2_lyj8j")

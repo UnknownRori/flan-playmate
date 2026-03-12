@@ -39,14 +39,14 @@ impl ICharacterBody2D for Player {
 #[godot_api]
 impl Player {
     #[func]
-    fn hit_info(&mut self, e: Gd<Node2D>) {
+    fn hit_info(&mut self, e: Gd<Node2D>, d: i64) {
         let s = self.to_gd();
         let sid = s.instance_id();
         let eid = e.instance_id();
         if sid == eid {
             // TODO : Apply bullet damage properly
             let mut hp = self.hp.clone().unwrap();
-            hp.bind_mut().take_damage(1.0);
+            hp.bind_mut().take_damage(d);
         }
     }
 }

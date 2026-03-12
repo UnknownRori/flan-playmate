@@ -19,6 +19,7 @@ pub struct Bullet {
     pub texture: Rect2,
     pub rotation: f32,
     pub radius: f32,
+    pub damage: i32,
     pub collision: EntityCollision,
     pub bullet_type: BulletType,
 }
@@ -32,6 +33,7 @@ impl Bullet {
         texture: Rect2,
         collision: EntityCollision,
         bullet_type: BulletType,
+        damage: i32,
     ) -> Self {
         Self {
             position,
@@ -42,15 +44,22 @@ impl Bullet {
             texture,
             collision,
             bullet_type,
+            damage,
             active: true,
         }
     }
 }
 
+#[derive(Debug, Clone)]
+pub struct EventHitBullet {
+    pub id: u32,
+    pub damage: i32,
+}
+
 pub struct BulletPool {
     pub items: Vec<Bullet>,
     pending_remove: Vec<u32>,
-    events: Vec<u32>,
+    events: Vec<EventHitBullet>,
     next_id: u32,
 }
 
@@ -93,7 +102,7 @@ impl BulletPool {
         }
     }
 
-    pub fn resolve_collision(&mut self, entities: &Vec<Entity>) -> &Vec<u32> {
+    pub fn resolve_collision(&mut self, entities: &Vec<Entity>) -> &Vec<EventHitBullet> {
         self.pending_remove.clear();
         self.events.clear();
         for (i, bullet) in &mut self.items.iter().enumerate() {
@@ -109,7 +118,10 @@ impl BulletPool {
                 let dist = e.position.distance_to(bullet.position);
                 if dist <= bullet.radius + e.radius {
                     self.pending_remove.push(i as u32);
-                    self.events.push(y as u32);
+                    self.events.push(EventHitBullet {
+                        id: y as u32,
+                        damage: bullet.damage,
+                    });
                 }
             }
         }

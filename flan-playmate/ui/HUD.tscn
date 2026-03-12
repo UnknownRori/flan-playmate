@@ -8,10 +8,8 @@
 [node name="BossInfo" parent="." unique_id=825940027 instance=ExtResource("1_aaqae")]
 
 [node name="Hp" parent="." unique_id=844654883 instance=ExtResource("1_1x8ju")]
-anchors_preset = 1
-anchor_left = 1.0
-offset_left = -74.0
-offset_top = 10.29
-offset_right = 6.1035156e-05
-offset_bottom = 31.29
-grow_horizontal = 0
+layout_direction = 3
+offset_top = 16.0
+offset_right = -3.0517578e-05
+offset_bottom = 31.999994
+size_flags_horizontal = 10

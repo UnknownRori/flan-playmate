@@ -32,10 +32,11 @@ impl INode for BulletManager {
     fn physics_process(&mut self, dt: f64) {
         self.pool.update(dt);
         self.entities.prepare();
-        let ids = self.pool.resolve_collision(&self.entities.items).clone();
-        for i in ids {
-            let obj = self.entities.get_entity(i).unwrap();
-            self.signals().hit_event().emit(&obj);
+        let events = self.pool.resolve_collision(&self.entities.items).clone();
+        for e in events {
+            let damage = e.damage;
+            let obj = self.entities.get_entity(e.id).unwrap();
+            self.signals().hit_event().emit(&obj, damage as i64);
         }
     }
 }
@@ -60,6 +61,7 @@ impl BulletManager {
         texture: Rect2,
         collision: EntityCollision,
         bullet_type: BulletType,
+        damage: i64,
     ) {
         let bullet = Bullet::new(
             position,
@@ -69,6 +71,7 @@ impl BulletManager {
             texture,
             collision,
             bullet_type,
+            damage as i32,
         );
         self.pool.spawn(bullet);
     }
@@ -79,7 +82,7 @@ impl BulletManager {
     }
 
     #[signal]
-    pub fn hit_event(target: Gd<Node2D>);
+    pub fn hit_event(target: Gd<Node2D>, damage: i64);
 
     //#[func]
     //pub fn add_entity(&mut self, position: Vector2, radius: f32, collision: EntityCollision) {

@@ -7,6 +7,7 @@ func _ready() -> void:
     progress.max_value = GameState.boss_hp.max_hp
     progress.value = GameState.boss_hp.current_hp
 
-func _hp_change(new_value: float):
-    progress.max_value = GameState.boss_hp.max_hp
-    progress.value = new_value
+func _hp_change(new_value: int):
+    print(new_value)
+    progress.max_value = float(GameState.boss_hp.max_hp)
+    progress.value = float(new_value)

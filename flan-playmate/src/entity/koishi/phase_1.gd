@@ -1,15 +1,19 @@
 extends NodeState
 
 @export var entity: CharacterBody2D
+@export var hp: HealthComponent
 @export var bullet_1: BulletSpawnerComponent
 
 @export_group("Attack Information")
 @export var timeout: float
+@export var hp_max: int
 
 func _process(_delta: float) -> void:
     entity.move_and_slide()
 
 func _on_enter() -> void:
+    hp.set_hp(hp_max)
+    hp.set_hp_max(hp_max)
     _start_attack()
 
 # INFO: Dummy attack

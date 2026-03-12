@@ -4,11 +4,18 @@
 [ext_resource type="Script" uid="uid://b1dl5p81ag7gq" path="res://src/ui/hp.gd" id="1_t1e47"]
 
 [node name="Hp" type="HBoxContainer" unique_id=844654883]
+clip_contents = true
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 16.0
+offset_right = -256.0
+offset_bottom = 23.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_bxljl")
 script = ExtResource("1_t1e47")
+
+[node name="Label" type="Label" parent="." unique_id=1444777568]
+visible = false
+layout_mode = 2
+text = "0000"

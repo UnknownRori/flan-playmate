@@ -1,51 +1,12 @@
 [gd_scene format=3 uid="uid://b13h3o26rij61"]
 
 [ext_resource type="Script" uid="uid://bhh2he8qxg44j" path="res://src/entity/player/player.gd" id="1_815tk"]
-[ext_resource type="Texture2D" uid="uid://cusuqty4nxenx" path="res://assets/textures/flandre.png" id="1_glu0s"]
+[ext_resource type="SpriteFrames" uid="uid://bqnc3ab0vgtm2" path="res://assets/atlas/flandre.tres" id="2_815tk"]
 [ext_resource type="Script" uid="uid://bk8i66vjeafa2" path="res://src/entity/player/idle.gd" id="2_birc2"]
 [ext_resource type="BulletResource" uid="uid://b5px0awrju3mi" path="res://resources/bullets/RedBullet.tres" id="2_gnrw7"]
 [ext_resource type="Script" uid="uid://c8cpgkpcq3emj" path="res://src/entity/player/move.gd" id="3_xuay3"]
 [ext_resource type="Script" uid="uid://b6vkibd4qcndj" path="res://src/entity/player/spell_a.gd" id="5_maded"]
 [ext_resource type="Script" uid="uid://dghnyiocacdwu" path="res://src/entity/player/spell_b.gd" id="6_aj81h"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_birc2"]
-atlas = ExtResource("1_glu0s")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xuay3"]
-atlas = ExtResource("1_glu0s")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gnrw7"]
-atlas = ExtResource("1_glu0s")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_maded"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_birc2")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xuay3")
-}],
-"loop": true,
-"name": &"left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gnrw7")
-}],
-"loop": true,
-"name": &"right",
-"speed": 5.0
-}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_glu0s"]
 
@@ -59,7 +20,7 @@ collision_layer = 2
 script = ExtResource("1_815tk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=566232744]
-sprite_frames = SubResource("SpriteFrames_maded")
+sprite_frames = ExtResource("2_815tk")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=170117485]
@@ -76,8 +37,13 @@ collision_mask = 20
 shape = SubResource("CircleShape2D_aj81h")
 debug_color = Color(0.96886295, 0, 0.46821105, 0.41960785)
 
-[node name="BulletSpawnerComponent" type="BulletSpawnerComponent" parent="." unique_id=15872827]
+[node name="BasicBulletSpawner" type="BulletSpawnerComponent" parent="." unique_id=15872827]
+damage = 2
 bullet = ExtResource("2_gnrw7")
+
+[node name="BasicTimer" type="Timer" parent="BasicBulletSpawner" unique_id=849011818]
+wait_time = 0.3
+one_shot = true
 
 [node name="VelocityComponent" type="VelocityComponent" parent="." unique_id=2021631412 node_paths=PackedStringArray("entity")]
 entity = NodePath("..")
@@ -86,25 +52,27 @@ max_speed = 150.0
 friction = 0.9
 
 [node name="HealthComponent" type="HealthComponent" parent="." unique_id=769555914]
-current_hp = 40.0
-max_hp = 40.0
+current_hp = 4.0
+max_hp = 4.0
 
 [node name="StateMachine" type="StateMachine" parent="." unique_id=1299920099 node_paths=PackedStringArray("current")]
 current = NodePath("Idle")
 
-[node name="Idle" type="NodeState" parent="StateMachine" unique_id=1387493718 node_paths=PackedStringArray("sprite", "entity", "basic", "velocity")]
+[node name="Idle" type="NodeState" parent="StateMachine" unique_id=1387493718 node_paths=PackedStringArray("sprite", "entity", "basic", "velocity", "attack_cooldown")]
 script = ExtResource("2_birc2")
 sprite = NodePath("../../AnimatedSprite2D")
 entity = NodePath("../..")
-basic = NodePath("../../BulletSpawnerComponent")
+basic = NodePath("../../BasicBulletSpawner")
 velocity = NodePath("../../VelocityComponent")
+attack_cooldown = NodePath("../../BasicBulletSpawner/BasicTimer")
 
-[node name="Move" type="NodeState" parent="StateMachine" unique_id=1717686612 node_paths=PackedStringArray("sprite", "entity", "basic", "velocity")]
+[node name="Move" type="NodeState" parent="StateMachine" unique_id=1717686612 node_paths=PackedStringArray("sprite", "entity", "basic", "velocity", "attack_cooldown")]
 script = ExtResource("3_xuay3")
 sprite = NodePath("../../AnimatedSprite2D")
 entity = NodePath("../..")
-basic = NodePath("../../BulletSpawnerComponent")
+basic = NodePath("../../BasicBulletSpawner")
 velocity = NodePath("../../VelocityComponent")
+attack_cooldown = NodePath("../../BasicBulletSpawner/BasicTimer")
 
 [node name="Spell A" type="NodeState" parent="StateMachine" unique_id=1394136622]
 script = ExtResource("5_maded")
@@ -113,3 +81,4 @@ script = ExtResource("5_maded")
 script = ExtResource("6_aj81h")
 
 [connection signal="dead" from="HealthComponent" to="." method="_on_health_component_dead"]
+[connection signal="hp_change" from="HealthComponent" to="." method="_on_health_component_hp_change"]

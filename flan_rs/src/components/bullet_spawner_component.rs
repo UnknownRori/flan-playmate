@@ -10,6 +10,8 @@ pub struct BulletSpawnerComponent {
     #[export]
     bullet_type: BulletType,
     #[export]
+    damage: i64,
+    #[export]
     bullet: Option<Gd<BulletResource>>,
 
     base: Base<Node>,
@@ -25,6 +27,7 @@ impl BulletSpawnerComponent {
         let radius = bl.bind().collision_circle as f32;
         let collision = self.target.clone();
         let bullet_type = self.bullet_type.clone();
+        let damage = self.damage;
         gm.bind_mut().spawn_bullet(
             position,
             velocity,
@@ -33,6 +36,7 @@ impl BulletSpawnerComponent {
             texture,
             collision,
             bullet_type,
+            damage,
         );
     }
 }

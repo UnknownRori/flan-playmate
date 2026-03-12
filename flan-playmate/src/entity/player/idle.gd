@@ -4,13 +4,16 @@ extends NodeState
 @export var entity: CharacterBody2D
 @export var basic: BulletSpawnerComponent
 @export var velocity: VelocityComponent
+@export var attack_cooldown: Timer
+
 
 func _on_process(_dt: float) -> void:
     GameInputs.update_movement()
     velocity.set_dir(Vector2(0, 0))
     
-    if GameInputs.is_attack():
-        basic.spawn(entity.global_position, Vector2(0, -100), 0)
+    if GameInputs.is_attack() and attack_cooldown.is_stopped():
+        basic.spawn(entity.global_position, Vector2(0, -100), 0.)
+        attack_cooldown.start()
         pass
     
 func _on_next_transition() -> void:
