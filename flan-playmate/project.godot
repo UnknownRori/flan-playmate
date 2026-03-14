@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="flan-playmate"
+config/name="Touhou Shinku - Touhou Scarlet"
+config/description="A Touhou Fan game with Boss Rush style Bullet Hell featuring Flandre Scarlet"
 run/main_scene="uid://qqd6vi6kxxtq"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"

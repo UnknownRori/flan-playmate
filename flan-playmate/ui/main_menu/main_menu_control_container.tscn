@@ -1,35 +1,83 @@
 [gd_scene format=3 uid="uid://wyl8dbhk678q"]
 
 [ext_resource type="Script" uid="uid://dk0anoq26m321" path="res://src/ui/main_menu_control_container.gd" id="1_xep5y"]
+[ext_resource type="Texture2D" uid="uid://d054aifhxvhsx" path="res://assets/textures/ui.png" id="2_v6jld"]
 
-[node name="MainMenuContainer" type="VBoxContainer" unique_id=1452491002]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2aocg"]
+atlas = ExtResource("2_v6jld")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v6jld"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2aocg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ofvhs"]
+
+[node name="MainMenuContainer" type="Control" unique_id=1522170322]
+layout_mode = 3
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_bottom = 41.0
+offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xep5y")
 
-[node name="New Run" type="Button" parent="." unique_id=1370703001]
+[node name="Cursor" type="Control" parent="." unique_id=1357774818]
+anchors_preset = 0
+offset_left = 76.0
+offset_right = 104.0
+offset_bottom = 32.0
+
+[node name="TextureRect" type="TextureRect" parent="Cursor" unique_id=2040447550]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_2aocg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2098735367]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 68.0
+
+[node name="New Run" type="Button" parent="VBoxContainer" unique_id=1370703001]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Exit")
+focus_neighbor_bottom = NodePath("../Option")
+focus_mode = 0
 theme_override_font_sizes/font_size = 8
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v6jld")
 text = "New Run"
 flat = true
 
-[node name="Button" type="Button" parent="." unique_id=490296135]
+[node name="Option" type="Button" parent="VBoxContainer" unique_id=490296135]
 layout_mode = 2
+focus_neighbor_top = NodePath("../New Run")
+focus_neighbor_bottom = NodePath("../Exit")
 theme_override_font_sizes/font_size = 8
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2aocg")
 disabled = true
 text = "Option"
 flat = true
 
-[node name="Exit" type="Button" parent="." unique_id=1011604425]
+[node name="Exit" type="Button" parent="VBoxContainer" unique_id=1011604425]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Option")
+focus_neighbor_bottom = NodePath("../New Run")
 theme_override_font_sizes/font_size = 8
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ofvhs")
 text = "Exit"
 flat = true
 
-[connection signal="pressed" from="New Run" to="." method="_on_new_run_pressed"]
-[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="VBoxContainer/New Run" to="." method="_on_new_run_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
