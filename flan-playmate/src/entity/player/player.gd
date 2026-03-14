@@ -1,5 +1,6 @@
 extends Player
 
+@onready var velocity_component = $VelocityComponent
 
 func _on_health_component_dead() -> void:
     print("Dead")

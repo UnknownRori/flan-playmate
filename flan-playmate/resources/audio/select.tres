@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AudioResource" format=3 uid="uid://bleleq4bdtc44"]
+
+[ext_resource type="Script" uid="uid://dfutypyb86ggr" path="res://src/resources/audio_resource.gd" id="1_4oyor"]
+[ext_resource type="AudioStream" uid="uid://dek611ucifp7m" path="res://assets/sfx/select.wav" id="2_4oyor"]
+
+[resource]
+script = ExtResource("1_4oyor")
+src = ExtResource("2_4oyor")
+volume = 0.5
+id = "select"
+name = "Select"
+metadata/_custom_type_script = "uid://dfutypyb86ggr"

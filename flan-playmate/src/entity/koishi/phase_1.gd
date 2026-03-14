@@ -27,6 +27,7 @@ func spread_times(time: int, delay: float, speed: float, dir: Vector2, num_side:
     for _i in range(0, time):
         spread(speed, dir, num_side, spread_angle)
         await get_tree().create_timer(delay).timeout
+        AudioManager.play_sfx("shot_1")
         
 func spread(speed: float, dir: Vector2, num_side: float, spread_angle: float):
     var offset_rotation = deg_to_rad(90)

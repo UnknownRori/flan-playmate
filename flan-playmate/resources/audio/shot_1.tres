@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AudioResource" format=3 uid="uid://f503b250o0cj"]
+
+[ext_resource type="Script" uid="uid://dfutypyb86ggr" path="res://src/resources/audio_resource.gd" id="1_jsnnt"]
+[ext_resource type="AudioStream" uid="uid://buvau26lcwtjl" path="res://assets/sfx/shot_1.wav" id="2_jsnnt"]
+
+[resource]
+script = ExtResource("1_jsnnt")
+src = ExtResource("2_jsnnt")
+id = "shot_1"
+name = "Shot 1"
+metadata/_custom_type_script = "uid://dfutypyb86ggr"

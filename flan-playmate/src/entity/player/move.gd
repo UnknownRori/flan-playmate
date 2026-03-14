@@ -19,6 +19,7 @@ func _on_process(_dt: float) -> void:
     if GameInputs.is_attack() and attack_cooldown.is_stopped():
         basic.spawn(entity.global_position, Vector2(0, -100), 0.)
         attack_cooldown.start()
+        AudioManager.play_sfx("player_shot")
         pass
 
 func _on_next_transition() -> void:

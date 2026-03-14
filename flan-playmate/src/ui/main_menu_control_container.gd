@@ -12,11 +12,14 @@ func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("down"):
         current = (current + 1) % len(buttons)
         _update_selection()
+        AudioManager.play_sfx("select")
     if Input.is_action_just_pressed("up"):
         current = (current - 1) % len(buttons)
         _update_selection()
+        AudioManager.play_sfx("select")
     if Input.is_action_just_pressed("confirm"):
         _click()
+        AudioManager.play_sfx("select")
 
 func _update_selection():
     for i in range(0, len(buttons)):

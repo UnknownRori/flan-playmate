@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cpueqs51g1mb5"]
+
+[ext_resource type="Script" uid="uid://bbaqgygrscyak" path="res://src/other/camera.gd" id="1_jdli5"]
+
+[node name="Camera" type="Camera2D" unique_id=906702370]
+position = Vector2(128, 128)
+position_smoothing_enabled = true
+script = ExtResource("1_jdli5")
+max_lean_offset = 5.0
+lean_speed = 2.0
+return_speed = 1.0
+follow_speed = 3.0

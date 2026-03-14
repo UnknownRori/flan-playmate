@@ -8,7 +8,9 @@ resource_local_to_scene = true
 shader = ExtResource("1_xtuqe")
 shader_parameter/interpolation = 0.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_lyj8j"]
+
 [node name="SpriteComponent" type="AnimatedSprite2D" unique_id=1587211298]
 material = SubResource("ShaderMaterial_lyj8j")
-animation = &"idle"
+sprite_frames = SubResource("SpriteFrames_lyj8j")
 script = ExtResource("2_lyj8j")
