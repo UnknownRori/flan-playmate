@@ -1,4 +1,4 @@
-# Flan Playmate
+# Touhou: Shinku (東方: 真紅)
 
 - [Overview](#overview)
 - [About Touhou](#about-touhou-project)
@@ -7,12 +7,12 @@
 
 ## Overview
 
-Flan Playmate is an open source **fan-game** set in world of [Touhou Project](https://en.wikipedia.org/wiki/Touhou_Project).
+Touhou: Shinku is an open source **fan-game** set in world of [Touhou Project](https://en.wikipedia.org/wiki/Touhou_Project).
 It is top-down vertical-scrolling curtain of fire shooting game (STG) also known as "Bullet hell" or "Danmaku".
 STGs are fast-paced games focused around pattern recognition and mastery through practice.
-Flan Playmate focus on Boss Rush featuring Flandre Scarlet and Koishi Komeiji
+Touhou: Shinku focus on Boss Rush featuring Flandre Scarlet and Koishi Komeiji
 
-Flan Playmate is written mostly in Rust inside Godot Engine v4.6 while the gameplay and UI is written in GDScript.
+Touhou: Shinku is written mostly in Rust inside Godot Engine v4.6 while the gameplay and UI is written in GDScript.
 This will avoid most of the performance bottleneck around dealing many entities.
 
 ## About Touhou Project
@@ -23,7 +23,7 @@ It is produced by and large by a single artist known as ZUN, and has a
 [permissive license](https://en.touhouwiki.net/wiki/Touhou_Wiki:Copyrights#Copyright_status.2FTerms_of_Use_of_the_Touhou_Project>)
 which allows for indie derivative works such as Kurai Project to legally exist.
 
-Flan Playmate is *not* a "clone" of Touhou Project, and tells an original story with its own
+Touhou: Shinku is *not* a "clone" of Touhou Project, and tells an original story with its own
 music, art, gameplay mechanics, and codebase. While some familiarity with Touhou
 is helpful, the gameplay can be enjoyed on its own without prior knowledge of
 the series.
@@ -44,7 +44,7 @@ You will need
 
 Start by cloning the repository
 ```sh
-git clone https://github.com/UnknownRori/flan-playmate
+git clone https://github.com/UnknownRori/touhou-shinku
 ```
 
 and open the project with your favorite editor and Godot Engine editor
