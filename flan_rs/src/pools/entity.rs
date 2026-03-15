@@ -68,8 +68,13 @@ impl EntityPool {
         self.items.clear();
         for i in &self.parents {
             let hitbox = i.get("hitbox").to::<Gd<HitboxComponent>>();
-            let position = i.get_global_position();
+            let hp = i.get("hp").to::<Gd<HealthComponent>>();
 
+            if hp.bind().invulnerable {
+                continue;
+            }
+
+            let position = i.get_global_position();
             let collision = hitbox.bind().mask.clone();
             let radius = hitbox.bind().radius as f32;
             self.items.push(Entity {

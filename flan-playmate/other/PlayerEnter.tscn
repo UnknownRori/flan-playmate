@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dpc6p3c744nvo"]
+
+[ext_resource type="Script" uid="uid://bq767ud2ycc8g" path="res://src/other/player_enter.gd" id="1_lqci5"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" unique_id=80904764]
+script = ExtResource("1_lqci5")

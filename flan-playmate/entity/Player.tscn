@@ -3,10 +3,18 @@
 [ext_resource type="Script" uid="uid://bhh2he8qxg44j" path="res://src/entity/player/player.gd" id="1_815tk"]
 [ext_resource type="SpriteFrames" uid="uid://bqnc3ab0vgtm2" path="res://assets/atlas/flandre.tres" id="2_815tk"]
 [ext_resource type="Script" uid="uid://bk8i66vjeafa2" path="res://src/entity/player/idle.gd" id="2_birc2"]
+[ext_resource type="PackedScene" uid="uid://c11fepolev4j1" path="res://components/SpriteComponent.tscn" id="2_da7gm"]
 [ext_resource type="BulletResource" uid="uid://b5px0awrju3mi" path="res://resources/bullets/RedBullet.tres" id="2_gnrw7"]
+[ext_resource type="Shader" uid="uid://3weajlto48cc" path="res://shaders/SpriteComponent.gdshader" id="3_dab8s"]
 [ext_resource type="Script" uid="uid://c8cpgkpcq3emj" path="res://src/entity/player/move.gd" id="3_xuay3"]
 [ext_resource type="Script" uid="uid://b6vkibd4qcndj" path="res://src/entity/player/spell_a.gd" id="5_maded"]
 [ext_resource type="Script" uid="uid://dghnyiocacdwu" path="res://src/entity/player/spell_b.gd" id="6_aj81h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o61f8"]
+resource_local_to_scene = true
+shader = ExtResource("3_dab8s")
+shader_parameter/interpolation = 0.0
+shader_parameter/mode = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_glu0s"]
 
@@ -19,9 +27,12 @@ hitbox = NodePath("HitboxComponent")
 collision_layer = 2
 script = ExtResource("1_815tk")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=566232744]
+[node name="SpriteComponent" parent="." unique_id=1587211298 node_paths=PackedStringArray("hp") instance=ExtResource("2_da7gm")]
+material = SubResource("ShaderMaterial_o61f8")
 sprite_frames = ExtResource("2_815tk")
 animation = &"idle"
+hp = NodePath("../HealthComponent")
+repeat = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=170117485]
 shape = SubResource("CircleShape2D_glu0s")
@@ -60,7 +71,7 @@ current = NodePath("Idle")
 
 [node name="Idle" type="NodeState" parent="StateMachine" unique_id=1387493718 node_paths=PackedStringArray("sprite", "entity", "basic", "velocity", "attack_cooldown")]
 script = ExtResource("2_birc2")
-sprite = NodePath("../../AnimatedSprite2D")
+sprite = NodePath("../../SpriteComponent")
 entity = NodePath("../..")
 basic = NodePath("../../BasicBulletSpawner")
 velocity = NodePath("../../VelocityComponent")
@@ -68,7 +79,7 @@ attack_cooldown = NodePath("../../BasicBulletSpawner/BasicTimer")
 
 [node name="Move" type="NodeState" parent="StateMachine" unique_id=1717686612 node_paths=PackedStringArray("sprite", "entity", "basic", "velocity", "attack_cooldown")]
 script = ExtResource("3_xuay3")
-sprite = NodePath("../../AnimatedSprite2D")
+sprite = NodePath("../../SpriteComponent")
 entity = NodePath("../..")
 basic = NodePath("../../BasicBulletSpawner")
 velocity = NodePath("../../VelocityComponent")
@@ -79,6 +90,3 @@ script = ExtResource("5_maded")
 
 [node name="Spell B" type="NodeState" parent="StateMachine" unique_id=1279895063]
 script = ExtResource("6_aj81h")
-
-[connection signal="dead" from="HealthComponent" to="." method="_on_health_component_dead"]
-[connection signal="hp_change" from="HealthComponent" to="." method="_on_health_component_hp_change"]

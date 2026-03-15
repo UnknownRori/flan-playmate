@@ -8,6 +8,9 @@ pub struct HealthComponent {
     current_hp: i64,
     #[export]
     max_hp: i64,
+    #[export]
+    pub invulnerable: bool,
+
     base: Base<Node>,
 }
 
@@ -17,6 +20,7 @@ impl INode for HealthComponent {
         Self {
             current_hp: 0,
             max_hp: 0,
+            invulnerable: false,
             base,
         }
     }
@@ -26,6 +30,10 @@ impl INode for HealthComponent {
 impl HealthComponent {
     #[func]
     pub fn take_damage(&mut self, value: i64) {
+        if self.invulnerable {
+            return;
+        }
+
         self.current_hp -= value;
         let hp = self.current_hp;
         if hp < 0 {

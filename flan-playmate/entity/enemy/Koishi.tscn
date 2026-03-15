@@ -4,33 +4,13 @@
 [ext_resource type="SpriteFrames" uid="uid://dywu0b5lj155s" path="res://assets/atlas/koishi.tres" id="1_hbinb"]
 [ext_resource type="Script" uid="uid://dvg3rwhghrbpd" path="res://src/entity/koishi/phase_1.gd" id="2_axao5"]
 [ext_resource type="BulletResource" uid="uid://blsxw1g5vbw3a" path="res://resources/bullets/LoveBullet.tres" id="2_hbinb"]
+[ext_resource type="Shader" uid="uid://3weajlto48cc" path="res://shaders/SpriteComponent.gdshader" id="2_rw8ym"]
 
-[sub_resource type="Shader" id="Shader_0532m"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_anxgj"]
 resource_local_to_scene = true
-code = "shader_type canvas_item;
-
-uniform float interpolation : hint_range(0, 1);
-
-void vertex() {
-	// Called for every vertex the material is visible on.
-}
-
-void fragment() {
-	if (COLOR.a > 0.0) {
-        COLOR = mix(COLOR, vec4(1), interpolation);
-    }
-}
-
-//void light() {
-//	// Called for every pixel for every light affecting the CanvasItem.
-//	// Uncomment to replace the default light processing function with this one.
-//}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rw8ym"]
-resource_local_to_scene = true
-shader = SubResource("Shader_0532m")
+shader = ExtResource("2_rw8ym")
 shader_parameter/interpolation = 0.0
+shader_parameter/mode = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kkp65"]
 
@@ -43,8 +23,9 @@ hp = NodePath("HealthComponent")
 is_boss = true
 
 [node name="SpriteComponent" parent="." unique_id=1587211298 node_paths=PackedStringArray("hp") instance=ExtResource("1_0532m")]
-material = SubResource("ShaderMaterial_rw8ym")
+material = SubResource("ShaderMaterial_anxgj")
 sprite_frames = ExtResource("1_hbinb")
+animation = &"idle"
 hp = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1504326857]
