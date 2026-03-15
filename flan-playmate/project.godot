@@ -25,6 +25,7 @@ buses/default_bus_layout="uid://bxlw132cirkm"
 SceneManager="*uid://7urm0ljwbjbf"
 AudioDatabase="*uid://df0jswdsaevyg"
 AudioManager="*uid://dqiumwbd2j18h"
+BulletHelper="*uid://cb8r740uw57wb"
 
 [display]
 

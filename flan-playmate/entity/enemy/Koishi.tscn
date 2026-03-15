@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://dvg3rwhghrbpd" path="res://src/entity/koishi/phase_1.gd" id="2_axao5"]
 [ext_resource type="BulletResource" uid="uid://blsxw1g5vbw3a" path="res://resources/bullets/LoveBullet.tres" id="2_hbinb"]
 [ext_resource type="Shader" uid="uid://3weajlto48cc" path="res://shaders/SpriteComponent.gdshader" id="2_rw8ym"]
+[ext_resource type="Script" uid="uid://dpf7pbj0n3jpd" path="res://src/entity/koishi/danmaku_paronia.gd" id="6_anxgj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_anxgj"]
 resource_local_to_scene = true
@@ -54,12 +55,18 @@ max_hp = 100.0
 entity = NodePath("..")
 
 [node name="StateMachine" type="StateMachine" parent="." unique_id=775177710 node_paths=PackedStringArray("current")]
-current = NodePath("Phase 1")
+current = NodePath("Opening Attack")
 
-[node name="Phase 1" type="NodeState" parent="StateMachine" unique_id=1330746589 node_paths=PackedStringArray("entity", "hp", "bullet_1")]
+[node name="Opening Attack" type="NodeState" parent="StateMachine" unique_id=1330746589 node_paths=PackedStringArray("entity", "hp", "bullet_1")]
 script = ExtResource("2_axao5")
 entity = NodePath("../..")
 hp = NodePath("../../HealthComponent")
 bullet_1 = NodePath("../../BulletSpawnerComponent")
 timeout = 60.0
 hp_max = 100
+
+[node name="Danmaku Paronia" type="NodeState" parent="StateMachine" unique_id=1506304201 node_paths=PackedStringArray("entity", "hp", "bullet_1")]
+script = ExtResource("6_anxgj")
+entity = NodePath("../..")
+hp = NodePath("../../HealthComponent")
+bullet_1 = NodePath("../../BulletSpawnerComponent")
