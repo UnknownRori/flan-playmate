@@ -1,4 +1,4 @@
-use godot::prelude::*;
+use godot::{classes::Timer, prelude::*};
 
 use crate::{bullet_manager::BulletManager, components::*, entities::*, pools::*};
 
@@ -11,6 +11,8 @@ pub struct GameState {
     pub player_hp: Option<Gd<HealthComponent>>,
     #[var]
     pub boss_hp: Option<Gd<HealthComponent>>,
+    #[var]
+    pub boss_timeout_timer: Option<Gd<Timer>>,
     #[var]
     pub bullet_manager: Option<Gd<BulletManager>>,
     base: Base<Node>,

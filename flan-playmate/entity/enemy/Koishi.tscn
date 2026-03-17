@@ -18,9 +18,10 @@ shader_parameter/mode = false
 [sub_resource type="CircleShape2D" id="CircleShape2D_hbinb"]
 radius = 5.0
 
-[node name="Koishi" type="Enemy" unique_id=2048994200 node_paths=PackedStringArray("hitbox", "hp") groups=["Enemy"]]
+[node name="Koishi" type="Enemy" unique_id=2048994200 node_paths=PackedStringArray("hitbox", "hp", "timeout_timer") groups=["Enemy"]]
 hitbox = NodePath("HitboxComponent")
 hp = NodePath("HealthComponent")
+timeout_timer = NodePath("TimeoutTimer")
 is_boss = true
 
 [node name="SpriteComponent" parent="." unique_id=1587211298 node_paths=PackedStringArray("hp") instance=ExtResource("1_0532m")]
@@ -54,19 +55,30 @@ max_hp = 100.0
 [node name="VelocityComponent" type="VelocityComponent" parent="." unique_id=1312228563 node_paths=PackedStringArray("entity")]
 entity = NodePath("..")
 
+[node name="TimeoutTimer" type="Timer" parent="." unique_id=820946582]
+one_shot = true
+
 [node name="StateMachine" type="StateMachine" parent="." unique_id=775177710 node_paths=PackedStringArray("initial")]
 initial = NodePath("Opening Attack")
 
-[node name="Opening Attack" type="NodeState" parent="StateMachine" unique_id=1330746589 node_paths=PackedStringArray("entity", "hp", "bullet_1")]
+[node name="Opening Attack" type="NodeState" parent="StateMachine" unique_id=1330746589 node_paths=PackedStringArray("bullet_1", "entity", "hp", "timeout_timer", "next_state")]
 script = ExtResource("2_axao5")
+bullet_1 = NodePath("../../BulletSpawnerComponent")
 entity = NodePath("../..")
 hp = NodePath("../../HealthComponent")
-bullet_1 = NodePath("../../BulletSpawnerComponent")
-timeout = 60.0
+timeout_timer = NodePath("../../TimeoutTimer")
+timeout = 45.0
 hp_max = 100
+spell_name = ""
+next_state = NodePath("../Danmaku Paronia")
 
-[node name="Danmaku Paronia" type="NodeState" parent="StateMachine" unique_id=1506304201 node_paths=PackedStringArray("entity", "hp", "bullet_1")]
+[node name="Danmaku Paronia" type="NodeState" parent="StateMachine" unique_id=1506304201 node_paths=PackedStringArray("bullet_1", "entity", "hp", "timeout_timer")]
 script = ExtResource("6_anxgj")
+bullet_1 = NodePath("../../BulletSpawnerComponent")
 entity = NodePath("../..")
 hp = NodePath("../../HealthComponent")
-bullet_1 = NodePath("../../BulletSpawnerComponent")
+timeout_timer = NodePath("../../TimeoutTimer")
+timeout = 60.0
+hp_max = 200
+spell_name = "Symbol \"Danmaku Paranoia\" "
+is_spell_card = true

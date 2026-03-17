@@ -1,23 +1,11 @@
-extends NodeState
+extends BossAttack
 
-@export var entity: CharacterBody2D
-@export var hp: HealthComponent
 @export var bullet_1: BulletSpawnerComponent
-
-@export_group("Attack Information")
-@export var timeout: float
-@export var hp_max: int
-
-func _on_enter() -> void:
-    hp.set_hp(hp_max)
-    hp.set_hp_max(hp_max)
-    _start_attack()
-    AudioManager.play_bgm("hartman")
-    print("Opening")
 
 # TODO: Make this bullet simple one
 func _start_attack():
-    while true:
+    AudioManager.play_bgm("hartman")
+    while !is_done:
         var parent_pos = entity.global_position
         var dir = parent_pos.direction_to(GameState.get_player_position())
 

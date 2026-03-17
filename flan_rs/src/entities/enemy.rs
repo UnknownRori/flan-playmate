@@ -1,5 +1,5 @@
 use godot::classes::object::ConnectFlags;
-use godot::classes::{CharacterBody2D, ICharacterBody2D};
+use godot::classes::{CharacterBody2D, ICharacterBody2D, Timer};
 use godot::prelude::*;
 
 use crate::autoload::GameState;
@@ -12,6 +12,8 @@ pub struct Enemy {
     hitbox: Option<Gd<HitboxComponent>>,
     #[export]
     hp: Option<Gd<HealthComponent>>,
+    #[export]
+    timeout_timer: Option<Gd<Timer>>,
     #[export]
     is_boss: bool,
     base: Base<CharacterBody2D>,
@@ -32,6 +34,7 @@ impl ICharacterBody2D for Enemy {
 
         if self.is_boss {
             gm.bind_mut().boss_hp = self.hp.clone();
+            gm.bind_mut().boss_timeout_timer = self.timeout_timer.clone();
         }
     }
 }
