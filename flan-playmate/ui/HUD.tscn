@@ -2,9 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://8nwxq5in5hhm" path="res://ui/HP.tscn" id="1_1x8ju"]
 [ext_resource type="PackedScene" uid="uid://cnv5l5tujdsoo" path="res://ui/BossInfo.tscn" id="1_aaqae"]
+[ext_resource type="PackedScene" uid="uid://t3ngxixo11v3" path="res://ui/FPS.tscn" id="1_wxbmk"]
 [ext_resource type="PackedScene" uid="uid://cihkpivhaj3uk" path="res://ui/MusicInfo.tscn" id="3_jd13s"]
 
 [node name="Hud" type="CanvasLayer" unique_id=1881991769]
+
+[node name="Fps" parent="." unique_id=2869551 instance=ExtResource("1_wxbmk")]
 
 [node name="BossInfo" parent="." unique_id=825940027 instance=ExtResource("1_aaqae")]
 

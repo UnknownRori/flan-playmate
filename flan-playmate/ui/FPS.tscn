@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://t3ngxixo11v3"]
+
+[ext_resource type="Theme" uid="uid://c160it28u3wq" path="res://assets/themes/default_theme.tres" id="1_fbcwb"]
+[ext_resource type="Script" uid="uid://bvxqqli6sdowc" path="res://src/ui/fps.gd" id="2_nt4jv"]
+
+[node name="Fps" type="Control" unique_id=2869551]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("1_fbcwb")
+script = ExtResource("2_nt4jv")
+
+[node name="Label" type="Label" parent="." unique_id=624422395]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "00"
+horizontal_alignment = 2
