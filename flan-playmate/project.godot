@@ -12,6 +12,7 @@ config_version=5
 
 config/name="Touhou Shinku - Touhou Scarlet"
 config/description="A Touhou Fan game with Boss Rush style Bullet Hell featuring Flandre Scarlet"
+config/version="0.0-alpha"
 run/main_scene="uid://qqd6vi6kxxtq"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"

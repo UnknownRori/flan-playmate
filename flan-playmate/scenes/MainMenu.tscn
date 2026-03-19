@@ -4,6 +4,7 @@
 [ext_resource type="TileSet" uid="uid://dojkuqk2eyog3" path="res://assets/atlas/tilesets.tres" id="2_l72w3"]
 [ext_resource type="Texture2D" uid="uid://d054aifhxvhsx" path="res://assets/textures/ui.png" id="4_ow34m"]
 [ext_resource type="PackedScene" uid="uid://wyl8dbhk678q" path="res://ui/main_menu/main_menu_control_container.tscn" id="4_ucygd"]
+[ext_resource type="Script" uid="uid://j2fq7htiklkc" path="res://src/ui/version.gd" id="5_l72w3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l72w3"]
 atlas = ExtResource("4_ow34m")
@@ -100,3 +101,14 @@ offset_top = 87.0
 offset_right = 129.0
 offset_bottom = 103.0
 texture = SubResource("AtlasTexture_826wr")
+
+[node name="Version" type="Label" parent="." unique_id=626552600]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 213.0
+offset_right = 173.0
+offset_bottom = 219.0
+theme_override_font_sizes/font_size = 4
+text = "${project.version}"
+horizontal_alignment = 1
+script = ExtResource("5_l72w3")
